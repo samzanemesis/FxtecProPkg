@@ -1,6 +1,7 @@
-Attempt to create a minimal EDK2 for Xiaomi MI 6.
+# FxtecProPkg
+EDK2 for F(x)tec Pro 1 and similar MSM8998-based devices 
 
-Based on zhuowei's port for Pixel3XL (https://github.com/Pixel3Dev/edk2-pixel3/).
+Based on zhuowei's port for Pixel3XL (https://github.com/Pixel3Dev/edk2-pixel3/) with further work from fxsheep (https://github.com/fxsheep/edk2-sagit).
 
 ## Status 
 
