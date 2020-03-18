@@ -15,9 +15,9 @@ FBCON_POSITION m_MaxPosition;
 FBCON_COLOR m_Color;
 BOOLEAN m_Initialized = FALSE;
 
-UINTN gWidth = FixedPcdGet32(PcdMipiFrameBufferWidth);
+UINTN gWidth = FixedPcdGet32(PcdMipiFrameBufferVisibleWidth);
 // Reserve half screen for output
-UINTN gHeight = FixedPcdGet32(PcdMipiFrameBufferHeight);
+UINTN gHeight = FixedPcdGet32(PcdMipiFrameBufferVisibleHeight);
 UINTN gBpp = FixedPcdGet32(PcdMipiFrameBufferPixelBpp);
 
 // Module-used internal routine
