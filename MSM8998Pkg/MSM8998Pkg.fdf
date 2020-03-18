@@ -50,52 +50,22 @@ NumBlocks     = 0x200
 ################################################################################
 
 # from ArmVirtPkg/ArmVirtQemuKernel.fdf
-################################################################################
-
 #
 # Implement the Linux kernel header layout so that the loader will identify
 # it as something bootable, and execute it with a FDT pointer in x0 or r2.
-# This area will be reused to store a copy of the FDT so round it up to 32 KB.
 #
 0x00000000|0x00008000
 DATA = {
-!if $(ARCH) == AARCH64
   0x01, 0x00, 0x00, 0x10,                         # code0: adr x1, .
   0xff, 0x1f, 0x00, 0x14,                         # code1: b 0x8000
   0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, # text_offset: 512 KB
-!if $(FD_SIZE_IN_MB) == 2
   0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, # image_size: 2 MB
-!endif
-!if $(FD_SIZE_IN_MB) == 3
-  0x00, 0x00, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, # image_size: 3 MB
-!endif
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, # flags
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, # res2
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, # res3
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, # res4
   0x41, 0x52, 0x4d, 0x64,                         # magic: "ARM\x64"
   0x00, 0x00, 0x00, 0x00                          # res5
-!else
-  0x08, 0x10, 0x4f, 0xe2, # adr r1, .
-  0x02, 0x00, 0xa0, 0xe1, # mov r0, r2 (DTB)
-  0x00, 0x00, 0xa0, 0xe1, # nop
-  0x00, 0x00, 0xa0, 0xe1, # nop
-  0x00, 0x00, 0xa0, 0xe1, # nop
-  0x00, 0x00, 0xa0, 0xe1, # nop
-  0x00, 0x00, 0xa0, 0xe1, # nop
-  0x00, 0x00, 0xa0, 0xe1, # nop
-
-  0xf6, 0x1f, 0x00, 0xea, # b 0x8000
-  0x18, 0x28, 0x6f, 0x01, # magic
-  0x00, 0x00, 0x00, 0x00, # start
-!if $(FD_SIZE_IN_MB) == 2
-  0x00, 0x00, 0x20, 0x00, # image size: 2 MB
-!endif
-!if $(FD_SIZE_IN_MB) == 3
-  0x00, 0x00, 0x30, 0x00, # image size: 3 MB
-!endif
-  0x01, 0x02, 0x03, 0x04  # endiannness flag
-!endif
 }
 
 0x00008000|0x001f8000
@@ -175,8 +145,6 @@ READ_LOCK_STATUS   = TRUE
   #
   # Virtual Keyboard
   #
-  INF EmbeddedPkg/Drivers/VirtualKeyboardDxe/VirtualKeyboardDxe.inf
-
   INF MSM8998Pkg/XiaomiMI6Dxe/XiaomiMI6Dxe.inf
   INF MSM8998Pkg/SimpleFbDxe/SimpleFbDxe.inf
 
@@ -250,42 +218,7 @@ READ_LOCK_STATUS   = TRUE
   #
   #Binary DXE drivers from Lenovo MSM8998
   #
-
-  FILE DRIVER = 0d35cd8e-97ea-4f9a-96af-0f0d89f76567 {
-#    SECTION DXE_DEPEX = MSM8998Pkg/Binary/UFSDxe/UFSDxe.depex
-    SECTION PE32 = MSM8998Pkg/Binary/UFSDxe/UFSDxe.efi
-    SECTION UI = "UFSDxe"
-  }
-
-  FILE DRIVER = 7a32bd23-f735-4f57-aa1a-447d2fe3be0d {
-    SECTION DXE_DEPEX = MSM8998Pkg/Binary/SPI/SPI.depex
-    SECTION PE32 = MSM8998Pkg/Binary/SPI/SPI.efi
-    SECTION UI = "SPI"
-  }
-
-  FILE DRIVER = 2a7b4bef-80cd-49e1-b473-374ba4d673fc {
-    SECTION DXE_DEPEX = MSM8998Pkg/Binary/SPMI/SPMI.depex
-    SECTION PE32 = MSM8998Pkg/Binary/SPMI/SPMI.efi
-    SECTION UI = "SPMI"
-  }
-
-  FILE DRIVER = 04de8591-d2b3-4077-bbbe-b12070094eb6 {
-    SECTION DXE_DEPEX = MSM8998Pkg/Binary/I2C/I2C.depex
-    SECTION PE32 = MSM8998Pkg/Binary/I2C/I2C.efi
-    SECTION UI = "I2C"
-  }
-
-  FILE DRIVER = 3299a266-15f0-4346-8318-716336736d3e {
-    SECTION DXE_DEPEX = MSM8998Pkg/Binary/UsbDeviceDxe/UsbDeviceDxe.depex
-    SECTION PE32 = MSM8998Pkg/Binary/UsbDeviceDxe/UsbDeviceDxe.efi
-    SECTION UI = "UsbDeviceDxe"
-  }
-
-  FILE DRIVER = 5af77f10-90df-4e7e-8325-a17ec09d5443 {
-    SECTION DXE_DEPEX = MSM8998Pkg/Binary/UsbMsdDxe/UsbMsdDxe.depex
-    SECTION PE32 = MSM8998Pkg/Binary/UsbMsdDxe/UsbMsdDxe.efi
-    SECTION UI = "UsbMsdDxe"
-  }
+!include MSM8998Pkg/ProprietaryFdf.fdf.inc
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8
