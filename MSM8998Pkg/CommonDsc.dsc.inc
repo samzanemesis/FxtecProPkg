@@ -116,7 +116,7 @@
 !endif
   DebugPrintErrorLevelLib|MdePkg/Library/BaseDebugPrintErrorLevelLib/BaseDebugPrintErrorLevelLib.inf
   ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf
-  ArmPlatformLib|MSM8998Pkg/Library/XiaomiMI6Lib/XiaomiMI6Lib.inf
+  ArmPlatformLib|MSM8998Pkg/Library/MSM8998Lib/MSM8998Lib.inf
   CompilerIntrinsicsLib|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
   CapsuleLib|MdeModulePkg/Library/DxeCapsuleLibNull/DxeCapsuleLibNull.inf
   UefiBootManagerLib|MdeModulePkg/Library/UefiBootManagerLib/UefiBootManagerLib.inf
@@ -485,7 +485,7 @@
   #
   EmbeddedPkg/Drivers/VirtualKeyboardDxe/VirtualKeyboardDxe.inf
 
-  MSM8998Pkg/XiaomiMI6Dxe/XiaomiMI6Dxe.inf
+  MSM8998Pkg/MSM8998Dxe/MSM8998Dxe.inf
   MSM8998Pkg/SimpleFbDxe/SimpleFbDxe.inf
 
   #
@@ -528,7 +528,8 @@
   #
   # SMBIOS Support
   #
-  MSM8998Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
+  #MSM8998Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
+  MSM8998Pkg/Drivers/SmbiosTableDxe/SmbiosTableDxe.inf
   MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 
   #

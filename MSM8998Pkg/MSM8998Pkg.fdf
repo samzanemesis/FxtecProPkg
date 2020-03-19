@@ -145,7 +145,7 @@ READ_LOCK_STATUS   = TRUE
   #
   # Virtual Keyboard
   #
-  INF MSM8998Pkg/XiaomiMI6Dxe/XiaomiMI6Dxe.inf
+  INF MSM8998Pkg/MSM8998Dxe/MSM8998Dxe.inf
   INF MSM8998Pkg/SimpleFbDxe/SimpleFbDxe.inf
 
 
@@ -192,7 +192,8 @@ READ_LOCK_STATUS   = TRUE
   #
   # SMBIOS Support
   #
-  INF MSM8998Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
+  #INF MSM8998Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
+  INF MSM8998Pkg/Drivers/SmbiosTableDxe/SmbiosTableDxe.inf
   INF MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 
   #

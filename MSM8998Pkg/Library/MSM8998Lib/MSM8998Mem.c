@@ -26,15 +26,15 @@
 #define DDR_ATTRIBUTES_CACHED           ARM_MEMORY_REGION_ATTRIBUTE_WRITE_BACK
 #define DDR_ATTRIBUTES_UNCACHED         ARM_MEMORY_REGION_ATTRIBUTE_UNCACHED_UNBUFFERED
 
-#define SDM845_PERIPH_BASE              0x00000000
-#define SDM845_PERIPH_SZ                0x80000000
+#define MSM8998_PERIPH_BASE              0x00000000
+#define MSM8998_PERIPH_SZ                0x80000000
 
 #define HIKEY960_MEMORY_SIZE               0x0000000100000000
 
-STATIC struct XiaomiMI6ReservedMemory {
+STATIC struct MSM8998ReservedMemory {
   EFI_PHYSICAL_ADDRESS         Offset;
   EFI_PHYSICAL_ADDRESS         Size;
-} XiaomiMI6ReservedMemoryBuffer [] = {
+} MSM8998ReservedMemoryBuffer [] = {
   { 0x85700000, 0x00600000 },    // hyp_region
   { 0x85e00000, 0x00100000 },    // xbl_region
   { 0x85fc0000, 0x02f40000 },    // removed_region
@@ -96,30 +96,30 @@ ArmPlatformGetVirtualMemoryMap (
   );
 
   NextHob.Raw = GetHobList ();
-  Count = sizeof (XiaomiMI6ReservedMemoryBuffer) / sizeof (struct XiaomiMI6ReservedMemory);
+  Count = sizeof (MSM8998ReservedMemoryBuffer) / sizeof (struct MSM8998ReservedMemory);
   while ((NextHob.Raw = GetNextHob (EFI_HOB_TYPE_RESOURCE_DESCRIPTOR, NextHob.Raw)) != NULL)
   {
     if (Index >= Count)
       break;
     if ((NextHob.ResourceDescriptor->ResourceType == EFI_RESOURCE_SYSTEM_MEMORY) &&
-        (XiaomiMI6ReservedMemoryBuffer[Index].Offset >= NextHob.ResourceDescriptor->PhysicalStart) &&
-        ((XiaomiMI6ReservedMemoryBuffer[Index].Offset + XiaomiMI6ReservedMemoryBuffer[Index].Size) <=
+        (MSM8998ReservedMemoryBuffer[Index].Offset >= NextHob.ResourceDescriptor->PhysicalStart) &&
+        ((MSM8998ReservedMemoryBuffer[Index].Offset + MSM8998ReservedMemoryBuffer[Index].Size) <=
          NextHob.ResourceDescriptor->PhysicalStart + NextHob.ResourceDescriptor->ResourceLength))
     {
       ResourceAttributes = NextHob.ResourceDescriptor->ResourceAttribute;
       ResourceLength = NextHob.ResourceDescriptor->ResourceLength;
       ResourceTop = NextHob.ResourceDescriptor->PhysicalStart + ResourceLength;
-      ReservedTop = XiaomiMI6ReservedMemoryBuffer[Index].Offset + XiaomiMI6ReservedMemoryBuffer[Index].Size;
+      ReservedTop = MSM8998ReservedMemoryBuffer[Index].Offset + MSM8998ReservedMemoryBuffer[Index].Size;
 
       // Create the System Memory HOB for the reserved buffer
       BuildResourceDescriptorHob (
         EFI_RESOURCE_MEMORY_RESERVED,
         EFI_RESOURCE_ATTRIBUTE_PRESENT,
-        XiaomiMI6ReservedMemoryBuffer[Index].Offset,
-        XiaomiMI6ReservedMemoryBuffer[Index].Size
+        MSM8998ReservedMemoryBuffer[Index].Offset,
+        MSM8998ReservedMemoryBuffer[Index].Size
       );
       // Update the HOB
-      NextHob.ResourceDescriptor->ResourceLength = XiaomiMI6ReservedMemoryBuffer[Index].Offset -
+      NextHob.ResourceDescriptor->ResourceLength = MSM8998ReservedMemoryBuffer[Index].Offset -
                                                    NextHob.ResourceDescriptor->PhysicalStart;
 
       // If there is some memory available on the top of the reserved memory then create a HOB
@@ -154,10 +154,10 @@ ArmPlatformGetVirtualMemoryMap (
   VirtualMemoryTable[Index].Length          = PcdGet64 (PcdSystemMemorySize);
   VirtualMemoryTable[Index].Attributes      = CacheAttributes;
 
-  // SDM845 SOC peripherals
-  VirtualMemoryTable[++Index].PhysicalBase  = SDM845_PERIPH_BASE;
-  VirtualMemoryTable[Index].VirtualBase     = SDM845_PERIPH_BASE;
-  VirtualMemoryTable[Index].Length          = SDM845_PERIPH_SZ;
+  // MSM8998 SOC peripherals
+  VirtualMemoryTable[++Index].PhysicalBase  = MSM8998_PERIPH_BASE;
+  VirtualMemoryTable[Index].VirtualBase     = MSM8998_PERIPH_BASE;
+  VirtualMemoryTable[Index].Length          = MSM8998_PERIPH_SZ;
   VirtualMemoryTable[Index].Attributes      = ARM_MEMORY_REGION_ATTRIBUTE_DEVICE;
 
   // End of Table
