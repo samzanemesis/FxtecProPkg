@@ -24,7 +24,7 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = MSM8998Pkg/MSM8998Pkg.fdf
+  FLASH_DEFINITION               = FxtecProPkg/FxtecProPkg.fdf
 
 !include MSM8998Pkg/CommonDsc.dsc.inc
 
@@ -35,5 +35,7 @@
   gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160|UINT32|0x0000a402
   gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferPixelBpp|32|UINT32|0x0000a403 #FrameBufferSerialPort
   gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth|1080|UINT32|0x0000a404 #FrameBufferSerialPort
-  gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight|2160|UINT32|0x0000a405 #FrameBufferSerialPort
-
+  gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight|720|UINT32|0x0000a405 #FrameBufferSerialPort
+  gMSM8998PkgTokenSpaceGuid.PcdSmbiosSystemModel|"F(x)tec Pro 1"|VOID*|0x0000a406
+  gMSM8998PkgTokenSpaceGuid.PcdSmbiosProcessorModel|"Snapdragon(TM) 835"|VOID*|0x0000a406
+  gMSM8998PkgTokenSpaceGuid.PcdSmbiosSystemRetailModel|"QX1000"|VOID*|0x0000a406

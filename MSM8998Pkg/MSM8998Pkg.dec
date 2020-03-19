@@ -43,4 +43,6 @@
   gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferPixelBpp|32|UINT32|0x0000a403
   gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth|1080|UINT32|0x0000a404
   gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight|2160|UINT32|0x0000a405
-
+  gMSM8998PkgTokenSpaceGuid.PcdSmbiosSystemModel|"MSM8998 Device"|VOID*|0x0000a406
+  gMSM8998PkgTokenSpaceGuid.PcdSmbiosProcessorModel|"Snapdragon(TM) 835"|VOID*|0x0000a407
+  gMSM8998PkgTokenSpaceGuid.PcdSmbiosSystemRetailModel|"MSM8998"|VOID*|0x0000a408

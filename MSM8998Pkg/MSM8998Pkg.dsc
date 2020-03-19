@@ -27,13 +27,3 @@
   FLASH_DEFINITION               = MSM8998Pkg/MSM8998Pkg.fdf
 
 !include MSM8998Pkg/CommonDsc.dsc.inc
-
-[PcdsFixedAtBuild.common]
-  # Simple FrameBuffer
-  gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9d400000|UINT32|0x0000a400
-  gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080|UINT32|0x0000a401
-  gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160|UINT32|0x0000a402
-  gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferPixelBpp|32|UINT32|0x0000a403
-  gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth|1080|UINT32|0x0000a404
-  gMSM8998PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight|2160|UINT32|0x0000a405
-
