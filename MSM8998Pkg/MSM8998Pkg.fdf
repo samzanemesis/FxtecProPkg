@@ -193,7 +193,7 @@ READ_LOCK_STATUS   = TRUE
   # SMBIOS Support
   #
   #INF MSM8998Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
-  INF MSM8998Pkg/Drivers/SmbiosTableDxe/SmbiosTableDxe.inf
+  INF MSM8998Pkg/Drivers/SmBiosTableDxe/SmBiosTableDxe.inf
   INF MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 
   #
